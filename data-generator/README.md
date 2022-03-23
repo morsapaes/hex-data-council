@@ -33,11 +33,11 @@ Tweet:
 ```javascript
 {
   "topic": "dc_tweets",
-  "key": "\"1503739684228370435\"",
-  "value": "{\"created_at\": \"2022-03-15T14:27:33.000Z\", \"id\": \"1503739684228370435\", \"author_id\": \"1116804034533498880\", \"text\": \"We’re excited to be attending Data Council Austin next week (March 23-24)! Stop by our booth for a demo and learn how Materialize is the fastest way to build the fastest data products. \\nhttps://t.co/dD2h9dlLFJ\"}",
-  "timestamp": 1647946272022,
+  "key": "\"1506278626270097410\"",
+  "value": "{\"id\": \"1506278626270097410\", \"text\": \"the only profitable vendor at data council this week is going to be a churro cart guy that rebrands as a modern data snack\", \"author_id\": \"24949412\", \"created_at\": \"2022-03-22T14:36:24.000Z\"}",
+  "timestamp": 1648000826874,
   "partition": 0,
-  "offset": 85
+  "offset": 53
 }
 ```
 
@@ -46,11 +46,11 @@ Quoted retweet:
 ```javascript
 {
   "topic": "dc_tweets",
-  "key": "\"1506232195475812359\"",
-  "value": "{\"attachments\": {}, \"author_id\": \"955397748580372480\", \"created_at\": \"2022-03-22T11:31:54.000Z\", \"geo\": {\"place_id\": \"3078869807f9dd36\"}, \"id\": \"1506232195475812359\", \"referenced_tweets\": [{\"type\": \"quoted\", \"id\": \"1506232160029757448\"}], \"text\": \"Quoted tweet https://t.co/a1Z4ATPHf1\"}",
-  "timestamp": 1647948725070,
+  "key": "\"1506043533873999876\"",
+  "value": "{\"referenced_tweets\": [{\"type\": \"quoted\", \"id\": \"1504083364608946177\"}], \"id\": \"1506043533873999876\", \"attachments\": {\"media_keys\": [\"3_1506043529050558467\"]}, \"text\": \"Looking forward to speaking @DataCouncilAI this week on @MarquezProject and @OpenLineage. Oh, and don’t forget to grab some swag! https://t.co/7sc9MGThuv https://t.co/rTgwSBUkdi\", \"author_id\": \"1035054002767945728\", \"created_at\": \"2022-03-21T23:02:14.000Z\"}",
+  "timestamp": 1648000826876,
   "partition": 0,
-  "offset": 89
+  "offset": 68
 }
 ```
 
@@ -59,11 +59,11 @@ Reply:
 ```javascript
 {
   "topic": "dc_tweets",
-  "key": "\"1503716872961015814\"",
-  "value": "{\"created_at\": \"2022-03-15T12:56:54.000Z\", \"id\": \"1503716872961015814\", \"author_id\": \"248615990\", \"referenced_tweets\": [{\"type\": \"replied_to\", \"id\": \"1503458784836042752\"}], \"text\": \"@spbail @DataCouncilAI @juansequeda cc @petesoder :)\", \"in_reply_to_user_id\": \"1153584362\"}",
-  "timestamp": 1647946272023,
+  "key": "\"1506304497391321093\"",
+  "value": "{\"referenced_tweets\": [{\"type\": \"replied_to\", \"id\": \"1506303524350558208\"}], \"id\": \"1506304497391321093\", \"text\": \"@j_houg Did Snowflake include the drop in usage caused by everyone being at @DataCouncilAI  as a risk factor in their quarterly forecast?\", \"author_id\": \"14578294\", \"in_reply_to_user_id\": \"376618837\", \"created_at\": \"2022-03-22T16:19:12.000Z\"}",
+  "timestamp": 1648000826873,
   "partition": 0,
-  "offset": 86
+  "offset": 45
 }
 ````
 
@@ -72,11 +72,11 @@ Reply:
 ```javascript
 {
   "topic": "dc_users",
-  "key": "\"1116804034533498880\"",
-  "value": "{\"name\": \"Materialize\", \"username\": \"MaterializeInc\", \"id\": \"1116804034533498880\", \"location\": \"New York, NY\"}",
-  "timestamp": 1647946272211,
+  "key": "\"14578294\"",
+  "value": "{\"id\": \"14578294\", \"name\": \"Josh Wills\", \"location\": \"San Francisco, CA\", \"username\": \"josh_wills\"}",
+  "timestamp": 1648000827070,
   "partition": 0,
-  "offset": 57
+  "offset": 23
 }
 ```
 
@@ -85,9 +85,9 @@ Reply:
 ```javascript
 {
   "topic": "dc_places",
-  "key": "{\"full_name\": \"Austin, TX\", \"id\": \"c3f37afa9efcf94b\", \"name\": \"Austin\", \"place_type\": \"city\"}",
-  "value": "[{\"full_name\": \"Austin, TX\", \"id\": \"c3f37afa9efcf94b\", \"name\": \"Austin\", \"place_type\": \"city\"}]",
-  "timestamp": 1647948717075,
+  "key": "\"101f6c4cf696e007\"",
+  "value": "{\"full_name\": \"San Francisco International Airport (SFO)\", \"id\": \"101f6c4cf696e007\", \"name\": \"San Francisco International Airport (SFO)\", \"place_type\": \"poi\"}",
+  "timestamp": 1648000827259,
   "partition": 0,
   "offset": 1
 }

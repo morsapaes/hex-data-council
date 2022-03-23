@@ -71,7 +71,7 @@ def set_rules(r_delete):
     # Filter the stream to include Data Council content, excluding retweets
     # (but including tweets, quote tweets and replies)
     rules = [
-        {"value": "@DataCouncilAI OR \"Data Council\" -is:retweet", "tag": "Tweets about Data Council Austin 2022"}
+        {"value": "(@DataCouncilAI OR \"Data Council\") -is:retweet", "tag": "Tweets about Data Council Austin 2022"}
     ]
     payload = {"add": rules}
     response = requests.post(
@@ -110,12 +110,15 @@ def get_stream(r_filter):
         if response_line:
             json_response = json.loads(response_line)
 
-            p.send(topic='dc_tweets', key=json.dumps(json_response['data']['id']).encode('utf8'), value=json.dumps(json_response['data'], ensure_ascii=False).encode('utf-8'))
+            p.send(topic='dc_tweets', value=json.dumps(json_response['data'], ensure_ascii=False).encode('utf-8'))
 
-            p.send(topic='dc_users', key=json.dumps(json_response['includes']['users'][0]).encode('utf8'), value=json.dumps(json_response['includes']['users'], ensure_ascii=False).encode('utf-8'))
+            for usr in json_response['includes']['users']:
+                p.send(topic='dc_users', key=json.dumps(usr['id']).encode('utf8'), value=json.dumps(usr, ensure_ascii=False).encode('utf-8'))
 
             if 'places' in json_response['includes']:
-                p.send(topic='dc_places', key=json.dumps(json_response['includes']['places'][0]).encode('utf8'), value=json.dumps(json_response['includes']['places'], ensure_ascii=False).encode('utf-8'))
+
+                for pl in json_response['includes']['places']:
+                    p.send(topic='dc_places', key=json.dumps(pl['id']).encode('utf8'), value=json.dumps(pl, ensure_ascii=False).encode('utf-8'))
 
             p.flush()
 
