@@ -1,6 +1,6 @@
-# Twitter Data Generator
+# Twitter data generator
 
-The `twitter_streaming.py` data generator fetches tweets is real-time using the (very swanky!) [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/migrate/overview). What's cool about it is that, for some endpoints, it allows you to consume events through an open, streaming API connection, avoiding the need to dabble with API call scheduling.
+The `twitter_streaming.py` data generator listens to tweets in real-time using the (very swanky!) [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/migrate/overview). What's cool about it is that, for some endpoints, it allows you to consume events through an open, streaming API connection, avoiding the need to dabble with API call scheduling.
 
 In this case, the generator is using the [Filtered Stream](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction) endpoint group to capture new tweets related to Data Council, and the [Kafka-Python](https://kafka-python.readthedocs.io/en/master/) client to push these tweets into Redpanda.
 
