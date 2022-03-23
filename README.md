@@ -34,10 +34,13 @@ docker-compose exec redpanda rpk topic consume dc_tweets
 
 docker-compose exec redpanda rpk topic consume dc_users
 
+# This topic isn't really used since it gets close to no data
 docker-compose exec redpanda rpk topic consume dc_places
 ```
 
 ## Materialize
+
+### Source
 
 ```sql
 CREATE SOURCE rp_twitter_tweets
@@ -54,6 +57,8 @@ FROM KAFKA BROKER 'redpanda:9092' TOPIC 'dc_places'
   FORMAT BYTES
 ENVELOPE UPSERT;
 ```
+
+### Views and materialized views
 
 ```sql
 CREATE MATERIALIZED VIEW twitter_tweets AS
@@ -88,21 +93,31 @@ SELECT
 FROM twitter_tweets
 GROUP BY 1;
 
-CREATE MATERIALIZED VIEW twitter_totals AS
-SELECT COUNT(twitter_id) AS total_tweets,
-	   COUNT(DISTINCT user_id) AS total_users,
+CREATE MATERIALIZED VIEW agg_users AS
+	SELECT COUNT(twitter_id) AS total_tweets
+	FROM twitter_tweets
+	GROUP BY twitter_id;
+
 
 CREATE VIEW twitter_tweets_enriched AS
 SELECT tweet_text AS tweet,
 	   username,
-	   CASE WHEN tweet_type IS NULL THEN 'tweet'
-	   		ELSE 'quoted retweet'
+	   CASE WHEN tweet_type = 'quoted' THEN 'quoted retweet'
+	        WHEN tweet_type = 'replied to' THEN 'tweet reply'
+	   ELSE 'tweet'
 	   END AS tweet_type,
        created_at
 FROM twitter_tweets tt
-LEFT JOIN twitter_users tu ON tt.user_id = tu.user_id
-WHERE tweet_type IS NULL OR tweet_type = 'quoted';
+JOIN twitter_users tu ON tt.user_id = tu.user_id;
+
+CREATE MATERIALIZED VIEW agg_tweets AS
+SELECT COUNT(tweet) AS total_tweets,
+	   username
+FROM twitter_tweets_enriched
+GROUP BY username;
 ```
+
+### Tables
 
 ```sql
 CREATE TABLE users_not_there
@@ -113,4 +128,4 @@ CREATE TABLE users_not_there
 
 ## Hex
 
-I'll follow this up with a blogpost walking through the whole pipeline.
+This was my first time using Hex and I have to say: I'm here for it. I'll follow this demo up with a blogpost walking through the magic underneath the [shared app]().
