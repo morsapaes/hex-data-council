@@ -90,26 +90,26 @@ The source data is stored as raw bytes, so we need to do some casting to convert
 ```sql
 CREATE MATERIALIZED VIEW twitter_tweets AS
 SELECT (data->>'id')::bigint AS tweet_id,
-	   (data->'referenced_tweets'->0->>'type')::string AS tweet_type,
-	   (data->>'text')::string AS tweet_text,
-	   (data->'referenced_tweets'->0->>'id')::string AS tweet_id_rr,
-	   (data->>'author_id')::bigint AS user_id,
-	   (data->'geo'->>'place_id')::string AS place_id,
-	   (data->>'created_at')::timestamp AS created_at
+       (data->'referenced_tweets'->0->>'type')::string AS tweet_type,
+       (data->>'text')::string AS tweet_text,
+       (data->'referenced_tweets'->0->>'id')::string AS tweet_id_rr,
+       (data->>'author_id')::bigint AS user_id,
+       (data->'geo'->>'place_id')::string AS place_id,
+       (data->>'created_at')::timestamp AS created_at
 FROM (SELECT CONVERT_FROM(data,'utf8')::jsonb AS data FROM rp_twitter_tweets);
 
 CREATE MATERIALIZED VIEW twitter_users AS
 SELECT (data->>'id')::bigint AS user_id,
-	   (data->>'username')::string AS username,
-	   (data->>'name')::string AS user_name,
-	   (data->>'location')::string AS location
+       (data->>'username')::string AS username,
+       (data->>'name')::string AS user_name,
+       (data->>'location')::string AS location
 FROM (SELECT CONVERT_FROM(data,'utf8')::jsonb AS data FROM rp_twitter_users);
 
 CREATE MATERIALIZED VIEW twitter_places AS
 SELECT (data->0->>'id')::string AS place_id,
-	   (data->0->>'name')::string AS place_name,
-	   (data->0->>'full_name')::string AS place_full_name,
-	   (data->0->>'full_name')::string AS place_type
+       (data->0->>'name')::string AS place_name,
+       (data->0->>'full_name')::string AS place_full_name,
+       (data->0->>'full_name')::string AS place_type
 FROM (SELECT CONVERT_FROM(data,'utf8')::jsonb AS data FROM rp_twitter_places);
 ```
 
