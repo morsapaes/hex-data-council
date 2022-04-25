@@ -135,9 +135,9 @@ FROM twitter_tweets_enriched
 GROUP BY username;
 
 CREATE MATERIALIZED VIEW agg_users AS
-	SELECT COUNT(twitter_id) AS total_tweets
-	FROM twitter_tweets
-	GROUP BY twitter_id;
+SELECT COUNT(twitter_id) AS total_tweets
+FROM twitter_tweets
+GROUP BY twitter_id;
 
 CREATE MATERIALIZED VIEW tweets_hourly AS
 SELECT
